@@ -1,5 +1,4 @@
 import "./globals.css";
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
