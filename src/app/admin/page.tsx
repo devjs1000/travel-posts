@@ -4,13 +4,14 @@ import React from "react";
 import MiddleForm from "./MiddleForm";
 import { RightForm } from "./RightForm";
 import withAuth from "../../HOC/withAuth";
-import { Form, Formik } from "formik";
+import { Form, Formik, useFormik } from "formik";
 import { LeftForm } from "./LeftForm";
+import { createPost, uploadToFirestore } from "../../helpers/fire";
 
 const Admin = () => {
-  return (
-    <Formik
-      initialValues={{
+  const { values, resetForm, handleSubmit, handleChange, setFieldValue } =
+    useFormik({
+      initialValues: {
         source: "",
         background: "#ffffff",
         text: "#000000",
@@ -31,27 +32,27 @@ const Admin = () => {
         toDate: "",
         fromTime: "",
         toTime: "",
-      }}
-      onSubmit={async (values) => {
-        console.log(values);
-      }}
-    >
-      {({ values, handleChange, setFieldValue, handleSubmit }) => (
-        <Form>
-          <h1 className="text-2xl font-bold text-green-900 text-center py-6 ">
-            Create a new <span className="text-green-700">Post</span>
-          </h1>
+      },
+      onSubmit: async (values) => {
+        createPost(values.sku, values);
+        resetForm();
+      },
+      enableReinitialize: true,
+    });
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1 className="text-2xl font-bold text-green-900 text-center py-6 ">
+        Create a new <span className="text-green-700">Post</span>
+      </h1>
 
-          <div className="bg-gray-100 h-screen w-screen flex justify-center items-start p-4 gap-4">
-            <LeftForm {...{ values, handleChange, setFieldValue }} />
-            <MiddleForm
-              {...{ values, handleChange, setFieldValue, handleSubmit }}
-            />
-            <RightForm {...{ values, handleChange, setFieldValue }} />
-          </div>
-        </Form>
-      )}
-    </Formik>
+      <div className="bg-gray-100 h-screen w-screen flex justify-center items-start p-4 gap-4">
+        <LeftForm {...{ values, handleChange, setFieldValue }} />
+        <MiddleForm
+          {...{ values, handleChange, setFieldValue, handleSubmit }}
+        />
+        <RightForm {...{ values, handleChange, setFieldValue }} />
+      </div>
+    </form>
   );
 };
 

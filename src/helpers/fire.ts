@@ -5,6 +5,9 @@ import {
   updateDoc,
   getDoc,
   deleteField,
+  addDoc,
+  collection,
+  setDoc
 } from "firebase/firestore";
 import {
   getAuth,
@@ -55,9 +58,25 @@ export function stateChangeLogin(func: Function) {
 }
 
 export async function uploadToFirestore(col: string, data: any) {
-  const ref = doc(db, "admin", 'team');
-  const response = await updateDoc(ref, { [data.name]: data });
+  try {
+    const ref = doc(db, "posts", col);
+    const response = await updateDoc(ref, { [data.title]: data });
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 }
+
+export const createPost = async (sku:string,data: any) => {
+  try {
+   
+
+    const response = await setDoc(doc(db, "posts", sku), data);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export async function getFromFirestore(col: string, func: Function) {
   const ref = doc(db, 'admin', col);
@@ -67,27 +86,33 @@ export async function getFromFirestore(col: string, func: Function) {
   }
 }
 
+export const getPost = async (col: string) => {
+
+  const ref = doc(db, 'posts', col);
+  const response = await getDoc(ref);
+  if (response.exists()) {
+    return response.data();
+  }
+}
+
+
 export async function deleteFromFirestore(col: string, fieldName: string) {
   const ref = doc(db, 'admin', col);
-
   const response = await updateDoc(ref, {
     [fieldName]: deleteField(),
   });
 }
 
-export async function uploadImageToFirebase(file: any, func: Function) {
-  console.log(file);
-
-  const storageRef = ref(storage, `team/${file.name}`);
+export async function uploadImageToFirebase(file: any) {
+  const storageRef = ref(storage, `images/${file.name}`);
   const res = await uploadBytes(storageRef, file);
   const url = await getDownloadURL(res.ref)
   const path = res.ref.fullPath
-  func({ url, path })
-  console.log(url, path);
-
+  return { url, path }
 }
 
 export async function deleteImageFromFirebase(imagePath: string) {
   const deleteRef = ref(storage, imagePath)
   const response = deleteObject(deleteRef)
+  return response
 }
