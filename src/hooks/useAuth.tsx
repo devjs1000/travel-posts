@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { auth } from "../helpers/fire";
 
-const useAuth = () => {
+function useAuth() {
   const [myAuth, setMyAuth] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
   const logout = () => {

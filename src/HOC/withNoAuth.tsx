@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../helpers/fire";
 
-export const withNoAuth = (Component: any) => {
-  return (props: any) => {
+function withAuth(Component: any) {
+  return function (props: any) {
     const router = useRouter();
     useEffect(() => {
       auth.onAuthStateChanged((user) => {
@@ -15,4 +15,4 @@ export const withNoAuth = (Component: any) => {
 
     return <Component {...props} />;
   };
-};
+}

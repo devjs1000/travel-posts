@@ -2,8 +2,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { auth } from "../helpers/fire";
 
-const withAuth = (WrappedComponent: any) => {
-  return (props: any) => {
+function withAuth(WrappedComponent: any) {
+  return function (props: any) {
     const router = useRouter();
 
     useEffect(() => {
@@ -18,6 +18,6 @@ const withAuth = (WrappedComponent: any) => {
 
     return <WrappedComponent {...props} />;
   };
-};
+}
 
 export default withAuth;
