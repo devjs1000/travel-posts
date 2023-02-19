@@ -1,42 +1,65 @@
-"use client"
+"use client";
 
 import React from "react";
-import Select from "react-select";
 import MiddleForm from "./MiddleForm";
 import { RightForm } from "./RightForm";
 import withAuth from "../../HOC/withAuth";
-import { SelectColor } from "./SelectColor";
+import { Form, Formik } from "formik";
+import { LeftForm } from "./LeftForm";
 
 const Admin = () => {
   return (
-    <div>
-      <h1 className="text-2xl font-bold text-green-900 text-center py-6 ">
-        Create a new <span className="text-green-700">Post</span>
-      </h1>
+    <Formik
+      initialValues={{
+        source: "",
+        background: "#ffffff",
+        text: "#000000",
+        button: "#ffffff",
+        buttonText: "#000000",
+        title: "",
+        description: "",
+        content: "",
+        images: "",
+        sku: "",
+        country: "",
+        state: "",
+        city: "",
+        isAvailable: true,
+        ticket: false,
+        fare: 0,
+        fromDate: "",
+        toDate: "",
+        fromTime: "",
+        toTime: "",
+      }}
+      onSubmit={async (values) => {
+        console.log(values);
+      }}
+    >
+      {({ values, handleChange, setFieldValue, handleSubmit }) => (
+        <Form>
+          <h1 className="text-2xl font-bold text-green-900 text-center py-6 ">
+            Create a new <span className="text-green-700">Post</span>
+          </h1>
 
-      <div className="bg-gray-100 h-screen w-screen flex justify-center items-start p-4 gap-4">
-        <div className="bg-white min-h-96 w-96 flex flex-col justify-center items-center p-4 rounded-md">
-          <input
-            type="url"
-            className="bg-gray-200 h-10 w-full px-4 py-2 my-1 rounded-md outline-green-500 "
-            placeholder="Source Link"
-          />
-
-          <details className="bg-white select-none  h-full w-full   rounded-md block">
-            <summary className="bg-white ring-green-500 ring-1 transition-all text-green-500 h-10 w-full px-4 py-2 my-1 rounded-md block">
-              Customize - UI
-            </summary>
-            <SelectColor title={"background"} />
-            <SelectColor title={"text"} />
-            <SelectColor title={"button"} />
-            <SelectColor title={"button text"} />
-          </details>
-        </div>
-        <MiddleForm />
-        <RightForm />
-      </div>
-    </div>
+          <div className="bg-gray-100 h-screen w-screen flex justify-center items-start p-4 gap-4">
+            <LeftForm {...{ values, handleChange, setFieldValue }} />
+            <MiddleForm
+              {...{ values, handleChange, setFieldValue, handleSubmit }}
+            />
+            <RightForm {...{ values, handleChange, setFieldValue }} />
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
 export default withAuth(Admin);
+
+export interface FormProps {
+  handleChange: any;
+  values: any;
+  setFieldValue?: (field: string, value: any, shouldValidate?: boolean) => void;
+  handleSubmit?: any;
+}

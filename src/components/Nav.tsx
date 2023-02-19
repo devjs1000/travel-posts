@@ -1,9 +1,7 @@
-
 import React from "react";
 import Link from "next/link";
 import { NavAuth } from "./NavAuth";
 const Nav = () => {
-
   return (
     <nav className="fixed z-10 w-full bg-white md:absolute md:bg-transparent">
       <div className="container m-auto px-2 md:px-12 lg:px-7">

@@ -10,9 +10,12 @@ const Login = () => {
     initialValues: {
       email: "",
       password: "",
+      loading: false,
     },
     onSubmit: async (values) => {
+      formik.setFieldValue("loading", true);
       const usr = await loginUser(values.email, values.password);
+      formik.setFieldValue("loading", false);
     },
   });
 
@@ -33,7 +36,11 @@ const Login = () => {
           onChange={formik.handleChange("password")}
           value={formik.values.password}
         />
-        <button className="bg-green-500 h-10 w-full px-4 py-2 my-1 rounded-md text-white" onClick={()=>formik.handleSubmit()}>
+        <button
+          disabled={!formik.isValid || formik.values.loading}
+          className="bg-green-500 h-10 w-full px-4 py-2 my-1 rounded-md text-white"
+          onClick={() => formik.handleSubmit()}
+        >
           Login
         </button>
       </div>

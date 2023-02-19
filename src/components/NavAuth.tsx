@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import useAuth from "../hooks/useAuth";
+import Link from "next/link";
 
 export const NavAuth = () => {
   const { status, logout } = useAuth();
@@ -24,18 +25,18 @@ export const NavAuth = () => {
               title="Start buying"
               className="w-full py-3 px-6 text-center rounded-full transition active:bg-green-200 focus:bg-green-100 sm:w-max"
             >
-              <span className="block text-green-800 font-semibold text-sm">
+              <Link href={"/login"} className="block text-green-800 font-semibold text-sm">
                 Sign up
-              </span>
+              </Link>
             </button>
             <button
               type="button"
               title="Start buying"
               className="w-full py-3 px-6 text-center rounded-full transition bg-green-300 hover:bg-green-100 active:bg-green-400 focus:bg-green-300 sm:w-max"
             >
-              <span className="block text-green-900 font-semibold text-sm">
+              <Link href={"/login"} className="block text-green-900 font-semibold text-sm">
                 Login
-              </span>
+              </Link>
             </button>
           </>
         )}
