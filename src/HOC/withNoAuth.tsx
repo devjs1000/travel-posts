@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../helpers/fire";
 
-function withAuth(Component: any) {
+export function withNoAuth(Component: any) {
   return function (props: any) {
     const router = useRouter();
     useEffect(() => {
