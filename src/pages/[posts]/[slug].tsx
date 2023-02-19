@@ -5,20 +5,20 @@ import { FaShare } from "react-icons/fa";
 import { getPost } from "../../helpers/fire";
 import MainFooter from "../../components/MainFooter";
 import Head from "next/head";
-const Post = () => {
+function Post() {
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<any>(null);
 
   const router = useRouter();
   const slug: any = router.query.slug || "not-found";
 
-  const fetchPost = async () => {
-    setLoading(true);
-    const res = await getPost(slug);
-    setLoading(false);
-    setData(res as any);
-  };
   useEffect(() => {
+    const fetchPost = async () => {
+      setLoading(true);
+      const res = await getPost(slug);
+      setLoading(false);
+      setData(res as any);
+    };
     fetchPost();
   }, [slug]);
 

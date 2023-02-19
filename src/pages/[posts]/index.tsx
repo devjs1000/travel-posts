@@ -2,7 +2,7 @@ import React from 'react'
 import "@/app/globals.css";
 
 
-const Post = () => {
+function Post() {
   return (
     <div>Post</div>
   )

@@ -3,7 +3,7 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 import Link from "next/link";
 
-export const NavAuth = () => {
+export function NavAuth(){
   const { status, logout } = useAuth();
 
   return (

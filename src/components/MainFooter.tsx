@@ -1,6 +1,6 @@
 import React from "react";
 import "@/app/globals.css";
-const MainFooter = () => {
+function MainFooter() {
   return (
     <footer className="bg-white mt-10 py-8">
       <p className="text-center text-gray-500 text-sm">

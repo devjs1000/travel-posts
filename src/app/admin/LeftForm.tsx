@@ -3,7 +3,7 @@ import React from "react";
 import { SelectColor } from "./SelectColor";
 import { FormProps } from "./page";
 
-export const LeftForm = ({ values, handleChange }: FormProps) => {
+export function LeftForm({ values, handleChange }: FormProps) {
   return (
     <div className="bg-white min-h-96 w-96 flex flex-col justify-center items-center p-4 rounded-md">
       <input

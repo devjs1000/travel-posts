@@ -3,7 +3,7 @@ import MainFooter from "@/components/MainFooter";
 import Nav from "@/components/Nav";
 import HeroSection from "@/components/HeroSection";
 
-const Home = () => {
+function Home(){
   return (
     <div>
       <div className="relative w-full min-h-[80vh]">

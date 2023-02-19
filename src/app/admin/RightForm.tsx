@@ -1,7 +1,7 @@
 import React from "react";
 import { FormProps } from "./page";
 
-export const RightForm = ({ values, handleChange }: FormProps) => {
+export function RightForm({ values, handleChange }: FormProps) {
   return (
     <div className="bg-white min-h-96 w-96 flex flex-col justify-center items-center p-4 rounded-md accent-green-500">
       <input
@@ -96,4 +96,4 @@ export const RightForm = ({ values, handleChange }: FormProps) => {
       </div>
     </div>
   );
-};
+}

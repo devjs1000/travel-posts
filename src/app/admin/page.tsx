@@ -8,7 +8,7 @@ import { Form, Formik, useFormik } from "formik";
 import { LeftForm } from "./LeftForm";
 import { createPost, uploadToFirestore } from "../../helpers/fire";
 
-const Admin = () => {
+function Admin(){
   const { values, resetForm, handleSubmit, handleChange, setFieldValue } =
     useFormik({
       initialValues: {

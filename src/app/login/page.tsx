@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { loginUser } from "../../helpers/fire";
 import { withNoAuth } from "../../HOC/withNoAuth";
 
-const Login = () => {
+function Login() {
   const formik = useFormik({
     initialValues: {
       email: "",

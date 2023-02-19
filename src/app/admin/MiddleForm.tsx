@@ -2,12 +2,12 @@ import React from "react";
 import { FormProps } from "./page";
 import { uploadImageToFirebase } from "../../helpers/fire";
 
-const MiddleForm = ({
+function MiddleForm({
   handleChange,
   values,
   handleSubmit,
   setFieldValue,
-}: FormProps) => {
+}: FormProps){
   const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     const file = files && files[0];

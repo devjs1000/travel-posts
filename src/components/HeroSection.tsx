@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeroSection = () => {
+function HeroSection() {
   return (
     <div className="relative bg-green-50">
       <div className="container m-auto px-6 pt-32 md:px-12 lg:pt-[4.8rem] lg:px-7">
