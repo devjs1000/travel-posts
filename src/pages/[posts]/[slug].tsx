@@ -1,7 +1,18 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import {
+  EmailIcon,
+  EmailShareButton,
+  FacebookIcon,
+  FacebookShareButton,
+  LinkedinIcon,
+  LinkedinShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "next-share";
 import "@/app/globals.css";
-import { FaShare } from "react-icons/fa";
 import { getPost } from "../../helpers/fire";
 import MainFooter from "../../components/MainFooter";
 import Head from "next/head";
@@ -42,28 +53,58 @@ function Post() {
         <meta property="twitter:image" content={data?.images} />
       </Head>
       {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="relative">
-            <div className="animate-spin rounded-full h-32 w-32 border-t-[10px] border-green-200 absolute top-0 left-0" />
-            <div className="animate-spin rounded-full h-32 w-32 border-l-[10px] border-green-400 absolute top-0 left-0" />
-            <div className="animate-spin rounded-full h-32 w-32 border-b-[10px] border-green-600 absolute top-0 left-0" />
-            <div className="animate-spin rounded-full h-32 w-32 border-r-[10px] border-green-800 absolute top-0 left-0" />
-          </div>
+        <div className="flex justify-center items-center h-screen w-full bg-white">
+          <p className="text-2xl font-bold bg-green-600 text-gray-100 rounded-full px-8 py-1">
+            loading...
+          </p>
         </div>
       ) : (
         <div className="bg-gray-100">
           <div className="flex flex-col items-center justify-center w-full  min-h-screen  ">
-            <div className="  w-[80%] h-[80%] bg-white rounded-lg  p-8 mx-8 mt-4">
+            <div className="w-full  md:w-[80%] h-[80%] bg-white rounded-lg  p-8 mx-8 mt-4">
               <div className="flex flex-col mb-4">
                 <div className="mb-4 flex justify-between items-center">
                   <h1 className="text-4xl font-bold  text-green-600  ">
                     {data?.title}
                   </h1>
-                  <div className="flex items-center">
-                    <FaShare
-                      onClick={handleShare}
+                  <div className="flex items-center gap-4 ">
+                    <WhatsappShareButton
+                      url={window.location.href}
+                      title={data?.title}
+                      separator=":: "
                       className="inline-block text-xl cursor-pointer hover:opacity-40   ml-2 text-green-600 "
-                    />
+                    >
+                      <WhatsappIcon className="h-10 w-10 rounded-full" />
+                    </WhatsappShareButton>
+                    <FacebookShareButton
+                      url={window.location.href}
+                      quote={data?.title}
+                      className="inline-block text-xl cursor-pointer hover:opacity-40   ml-2 text-green-600 "
+                    >
+                      <FacebookIcon className="h-10 w-10 rounded-full" />
+                    </FacebookShareButton>
+                    <TelegramShareButton
+                      url={window.location.href}
+                      title={data?.title}
+                      className="inline-block text-xl cursor-pointer hover:opacity-40   ml-2 text-green-600 "
+                    >
+                      <TelegramIcon className="h-10 w-10 rounded-full" />
+                    </TelegramShareButton>
+                    <LinkedinShareButton
+                      url={window.location.href}
+                      title={data?.title}
+                      className="inline-block text-xl cursor-pointer hover:opacity-40   ml-2 text-green-600 "
+                    >
+                      <LinkedinIcon className="h-10 w-10 rounded-full" />
+                    </LinkedinShareButton>
+                    <EmailShareButton
+                      url={window.location.href}
+                      subject={data?.title}
+                      body={data?.description}
+                      className="inline-block text-xl cursor-pointer hover:opacity-40   ml-2 text-green-600 "
+                    >
+                      <EmailIcon className="h-10 w-10 rounded-full" />
+                    </EmailShareButton>
                   </div>
                 </div>
                 <p className="text-md font-normal text-gray-400 mt-4  ">
@@ -90,6 +131,7 @@ function Post() {
       )}
     </>
   );
-};
+}
 
 export default Post;
+

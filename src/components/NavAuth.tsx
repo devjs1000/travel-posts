@@ -8,6 +8,7 @@ export function NavAuth(){
 
   return (
     <div className="hidden w-full lg:flex flex-wrap justify-end items-center space-y-6 p-6 rounded-xl bg-white md:space-y-0 md:p-0 md:flex-nowrap md:bg-transparent lg:w-7/12">
+      
       <div className="w-full space-y-2 border-green-200 lg:space-y-0 md:w-max lg:border-l">
         {status ? (
           <button
